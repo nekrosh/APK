@@ -186,7 +186,7 @@ void interrupt new_irq13(...) { old_irq13(); output_regs(); }
 void interrupt new_irq14(...) { old_irq14(); output_regs(); }
 void interrupt new_irq15(...) { old_irq15(); output_regs(); }
 
-void interrupt new_irq1()
+void interrupt new_irq1(...)
 {
 	if (attr == attr1)
 	{
