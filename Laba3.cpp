@@ -1,7 +1,7 @@
 
 #include <stdio.h>
 #include <dos.h>
-
+#include <conio.h>
 #define NEW_MASTER_BASE_ADDR 0x08
 #define NEW_SLAVE_BASE_ADDR  0x70
 
@@ -55,7 +55,7 @@ int main()
 	attr = attr1;
 
 	init();
-
+	clrscr();
 	FP_SEG(fp) = _psp; // получаем сегмент
 	FP_OFF(fp) = 0x2c; // смещение сегмента данных с переменными среды
 	_dos_freemem(*fp);	// освобождение памяти
@@ -110,6 +110,8 @@ void init()
 	outp(0xA1, 0x02); 				  // icw3 
 	outp(0x21, 0x01);				  // icw4 
 	outp(0xA1, 0x01);                 // icw4  
+
+
 	//Разрешить прерывания
 	_enable();
 }
@@ -196,7 +198,8 @@ void interrupt new_irq1(...)
 	{
 		attr = attr1;
 	}
-
-	old_irq1();
 	output_regs();
+	old_irq1();
+	
+	
 }
